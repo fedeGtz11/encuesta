@@ -1,3 +1,8 @@
+import 'package:encuestas/dashboard.dart';
+import 'package:encuestas/questionsa.dart';
+import 'package:encuestas/questionsb.dart';
+import 'package:encuestas/summary.dart';
+import 'package:encuestas/survey.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -6,10 +11,25 @@ class HomePage extends StatefulWidget {
   final String title;
 
   @override
-  State<HomePage> createState() => _MyHomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _MyHomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> {
+  int _selectedIndex = 0;
+  static const List<Widget> _pages = <Widget>[
+    DashboardPage(),
+    SurveyPage(),
+    QuestionsAPage(),
+    QuestionsBPage(),
+    SummaryPage(),
+  ];
+
+  void _pageChange(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,19 +37,10 @@ class _MyHomePageState extends State<HomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-          ],
-        ),
-      ),
+      body: _pages.elementAt(_selectedIndex),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        tooltip: 'Increment',
+        onPressed: () => _pageChange(1),
+        tooltip: 'Nueva Encuesta',
         child: const Icon(Icons.add),
       ),
     );
