@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'models/student.dart';
 
 class QuestionsAPage extends StatefulWidget {
   final Function(int) onPageChange;
@@ -12,6 +13,12 @@ class QuestionsAPage extends StatefulWidget {
 class _QuestionsAPageState extends State<QuestionsAPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _recordController = TextEditingController();
+  final TextEditingController _ageController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -22,6 +29,7 @@ class _QuestionsAPageState extends State<QuestionsAPage> {
             padding: EdgeInsets.all(16),
             child: TextFormField(
               decoration: InputDecoration(hintText: '¿Cuál es tu nombre?'),
+              controller: _nameController,
               validator: (String? value) {
                 if (value == null || value.isEmpty) {
                   return 'falta llenar el nombre';
@@ -34,6 +42,7 @@ class _QuestionsAPageState extends State<QuestionsAPage> {
             padding: EdgeInsets.all(16),
             child: TextFormField(
               decoration: InputDecoration(hintText: '¿Cuál es tu telefono?'),
+              controller: _phoneController,
               validator: (String? value) {
                 if (value == null || value.isEmpty) {
                   return 'falta llenar el telefono';
@@ -46,6 +55,7 @@ class _QuestionsAPageState extends State<QuestionsAPage> {
             padding: EdgeInsets.all(16),
             child: TextFormField(
               decoration: InputDecoration(hintText: '¿Cuál es tu correo?'),
+              controller: _emailController,
               validator: (String? value) {
                 if (value == null || value.isEmpty) {
                   return 'falta llenar el correo';
@@ -58,6 +68,7 @@ class _QuestionsAPageState extends State<QuestionsAPage> {
             padding: EdgeInsets.all(16),
             child: TextFormField(
               decoration: InputDecoration(hintText: '¿Cuál es tu matricula?'),
+              controller: _recordController,
               validator: (String? value) {
                 if (value == null || value.isEmpty) {
                   return 'falta llenar la matricula';
@@ -70,6 +81,7 @@ class _QuestionsAPageState extends State<QuestionsAPage> {
             padding: EdgeInsets.all(16),
             child: TextFormField(
               decoration: InputDecoration(hintText: '¿Cuál es tu edad?'),
+              controller: _ageController,
               validator: (String? value) {
                 if (value == null || value.isEmpty) {
                   return 'falta llenar la edad';
@@ -81,7 +93,16 @@ class _QuestionsAPageState extends State<QuestionsAPage> {
           ElevatedButton(
             onPressed: () {
               if (_formKey.currentState!.validate()) {
-                //las a realizar
+                //las acciones a realizar
+
+                //aqui se construye el modelo
+                Student _student = Student(
+                    _nameController.text,
+                    _phoneController.text,
+                    _emailController.text,
+                    _recordController.text,
+                    _ageController.text);
+
                 widget.onPageChange(3);
               }
             },
