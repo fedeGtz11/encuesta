@@ -4,6 +4,7 @@ import 'package:encuestas/questionsb.dart';
 import 'package:encuestas/summary.dart';
 import 'package:encuestas/survey.dart';
 import 'package:flutter/material.dart';
+import 'models/student.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
@@ -17,6 +18,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   String title = "Inicio";
+  Student? _student;
 
   late List<Widget> _pages;
 
@@ -28,7 +30,7 @@ class _HomePageState extends State<HomePage> {
       DashboardPage(),
       SurveyPage(onPageChange: _pageChange),
       QuestionsAPage(onPageChange: _pageChange),
-      QuestionsBPage(onPageChange: _pageChange),
+      QuestionsBPage(onPageChange: _pageChange, student: _student),
       SummaryPage(onPageChange: _pageChange),
     ];
   }
@@ -41,10 +43,17 @@ class _HomePageState extends State<HomePage> {
     'Resumen',
   ];
 
-  void _pageChange(int index) {
+  void _pageChange(int index, [Student? student]) {
     setState(() {
       _selectedIndex = index;
       title = _titles[index];
+
+      if (student != null) {
+        _student = student;
+
+        _pages[3] =
+            QuestionsBPage(onPageChange: _pageChange, student: _student);
+      }
     });
   }
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'models/student.dart';
 
 class QuestionsAPage extends StatefulWidget {
-  final Function(int) onPageChange;
+  final Function(int, Student) onPageChange;
 
   const QuestionsAPage({super.key, required this.onPageChange});
 
@@ -96,14 +96,14 @@ class _QuestionsAPageState extends State<QuestionsAPage> {
                 //las acciones a realizar
 
                 //aqui se construye el modelo
-                Student _student = Student(
+                Student student = Student(
                     _nameController.text,
                     _phoneController.text,
                     _emailController.text,
                     _recordController.text,
                     _ageController.text);
 
-                widget.onPageChange(3);
+                widget.onPageChange(3, student);
               }
             },
             child: Text('Continuar'),
