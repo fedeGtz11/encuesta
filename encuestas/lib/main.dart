@@ -17,7 +17,7 @@ class Surveys extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.purpleAccent),
         useMaterial3: true,
       ),
-      home: const HomePage(title: 'Encuestas'),
+      home: const HomePage(),
     );
   }
 }

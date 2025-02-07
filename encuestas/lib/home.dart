@@ -7,9 +7,7 @@ import 'package:flutter/material.dart';
 import 'models/student.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key, required this.title});
-
-  final String title;
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -31,15 +29,15 @@ class _HomePageState extends State<HomePage> {
       SurveyPage(onPageChange: _pageChange),
       QuestionsAPage(onPageChange: _pageChange),
       QuestionsBPage(onPageChange: _pageChange, student: _student),
-      SummaryPage(onPageChange: _pageChange),
+      SummaryPage(onPageChange: _pageChange, student: _student),
     ];
   }
 
-  static const List<String> _titles = <String>[
+  static const List<String> _titles = [
     'Dashboard',
     'Encuesta',
     'Preguntas',
-    'Preguntas (cont)',
+    'Preguntas (Continuacion)',
     'Resumen',
   ];
 
@@ -53,6 +51,7 @@ class _HomePageState extends State<HomePage> {
 
         _pages[3] =
             QuestionsBPage(onPageChange: _pageChange, student: _student);
+        _pages[4] = SummaryPage(onPageChange: _pageChange, student: _student);
       }
     });
   }
