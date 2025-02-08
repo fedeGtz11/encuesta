@@ -5,8 +5,7 @@ class QuestionsBPage extends StatefulWidget {
   final Function(int, Student) onPageChange;
   final Student? student;
 
-  const QuestionsBPage(
-      {super.key, required this.onPageChange, required this.student});
+  const QuestionsBPage({super.key, required this.onPageChange, required this.student});
 
   @override
   State<QuestionsBPage> createState() => _QuestionsBPageState();
@@ -24,15 +23,36 @@ class _QuestionsBPageState extends State<QuestionsBPage> {
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
-      child: Padding(
+      child:
+      Padding(
         padding: EdgeInsets.all(16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            Text(
+              'Matricula: ${widget.student?.record ?? 'N/A'}', 
+              style: TextStyle(fontSize: 20),
+            ),
+            Text(
+              'Nombre: ${widget.student?.name ?? 'N/A'}', 
+              style: TextStyle(fontSize: 20),
+            ),
+            Text(
+              'Correo: ${widget.student?.email ?? 'N/A'}',
+              style: TextStyle(fontSize: 20),
+            ),
+            Text(
+              'Telefono: ${widget.student?.phone ?? 'N/A'}',
+              style: TextStyle(fontSize: 20),
+            ),
+            Text(
+              'Edad: ${widget.student?.age ?? 'N/A'}',
+              style: TextStyle(fontSize: 20),
+            ),
+
             TextFormField(
-              decoration: InputDecoration(
-                  hintText: 'Horario Preferencial (Matutino/Vespertino) '),
+              decoration: InputDecoration(hintText: 'Horario Preferencial (Matutino/Vespertino) '),
               controller: _horarioController,
               validator: (String? value) {
                 if (value == null || value.isEmpty) {
@@ -72,8 +92,7 @@ class _QuestionsBPageState extends State<QuestionsBPage> {
               },
             ),
             TextFormField(
-              decoration: InputDecoration(
-                  hintText: 'Sector Residencial (norte, sur, poniente, etc)'),
+              decoration: InputDecoration(hintText: 'Sector Residencial (norte, sur, poniente, etc)'),
               controller: _sectorController,
               validator: (String? value) {
                 if (value == null || value.isEmpty) {
